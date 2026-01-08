@@ -28,6 +28,9 @@ class User extends Authenticatable
         'email_verified_at',
         'birth_date',
         'fcm_token',
+        // Exchange
+        'balance',
+        'locked_balance',
     ];
 
     /**
@@ -43,6 +46,8 @@ class User extends Authenticatable
 
     protected $casts = [
         'status' => 'integer',
+        'balance' => 'decimal:2',
+        'locked_balance' => 'decimal:2',
     ];
 
     /**
@@ -57,6 +62,16 @@ class User extends Authenticatable
             'birth_date' => 'date',
             'password' => 'hashed',
         ];
+    }
+
+    public function assets()
+    {
+        return $this->hasMany(Asset::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
 }
