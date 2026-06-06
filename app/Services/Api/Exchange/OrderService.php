@@ -85,8 +85,8 @@ class OrderService
                 ]);
             }
 
-            // Attempt to match immediately
             $match = $this->matchingService->matchOne($order->id);
+            $order->refresh();
 
             return ['status' => 201, 'message' => 'Order placed', 'data' => ['order' => $order, 'match' => $match]];
         });

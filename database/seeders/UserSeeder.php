@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'phone' => '1234567890',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
+            'status' => 1,
             'balance' => 10000,
         ]);
 
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
             'phone' => '0987654321',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
+            'status' => 1,
             'balance' => 0,
         ]);
 

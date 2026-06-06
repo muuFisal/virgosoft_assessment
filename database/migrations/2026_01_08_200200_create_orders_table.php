@@ -20,7 +20,8 @@ return new class extends Migration
             $table->decimal('locked_usd', 18, 2)->default(0);   // only for BUY
             $table->decimal('locked_asset', 18, 8)->default(0); // only for SELL
 
-            $table->enum('status', ['open', 'filled', 'cancelled'])->default('open');
+            // Assessment-required status values: open=1, filled=2, cancelled=3.
+            $table->unsignedTinyInteger('status')->default(1);
             $table->timestamps();
 
             $table->index(['symbol', 'side', 'status']);

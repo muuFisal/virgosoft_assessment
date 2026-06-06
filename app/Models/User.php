@@ -43,13 +43,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-
-    protected $casts = [
-        'status' => 'integer',
-        'balance' => 'decimal:2',
-        'locked_balance' => 'decimal:2',
-    ];
-
     /**
      * Get the attributes that should be cast.
      *
@@ -61,6 +54,9 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'birth_date' => 'date',
             'password' => 'hashed',
+            'status' => 'integer',
+            'balance' => 'decimal:2',
+            'locked_balance' => 'decimal:2',
         ];
     }
 

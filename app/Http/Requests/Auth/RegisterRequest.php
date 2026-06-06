@@ -61,10 +61,10 @@ class RegisterRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name'     => __('dashboard.name'),
-            'phone'    => __('dashboard.phone'),
-            'email'    => __('dashboard.email'),
-            'password' => __('dashboard.password'),
+            'name'     => 'name',
+            'phone'    => 'phone',
+            'email'    => 'email',
+            'password' => 'password',
         ];
     }
 

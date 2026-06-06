@@ -2,15 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
-use App\Http\Controllers\Api\Auth\ForgotController;
-use App\Http\Controllers\Api\SettingsController;
 use App\Http\Controllers\Api\Exchange\ProfileController;
 use App\Http\Controllers\Api\Exchange\OrdersController;
-
-
-## ================== SETTINGS ================== ##
-Route::get('/settings', [SettingsController::class, 'index']);
-## ================== SETTINGS ================== ##
 
 
 
@@ -26,29 +19,13 @@ Route::controller(AuthController::class)->group(function () {
 });
 ## ------------------ AUTH ROUTES ------------------ ##
 
-
-
-
-## ------------------ Forgot Password ------------------ ##
-Route::post('/forgot/password',         [ForgotController::class, 'forgotPassword'])->middleware('guest');
-Route::post('/forgot/verify-otp',       [ForgotController::class, 'verifyOtp'])->middleware('guest');
-Route::post('/forgot/resend-otp',       [ForgotController::class, 'resendOtp'])->middleware('guest');
-Route::post('/forgot/reset-password',   [ForgotController::class, 'resetPassword'])->middleware('guest');
-## ------------------ Forgot Password ------------------ ##
-
-
 ## ================== EXCHANGE (Assessment) ================== ##
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show']);
 
     Route::get('/orders', [OrdersController::class, 'index']);
-    Route::get('/orders/orderbook', [OrdersController::class, 'orderbook']);
+    Route::get('/my-orders', [OrdersController::class, 'myOrders']);
     Route::post('/orders', [OrdersController::class, 'store']);
     Route::post('/orders/{id}/cancel', [OrdersController::class, 'cancel']);
-
-    // Optional testing endpoint
-    Route::post('/orders/{id}/match', [OrdersController::class, 'match']);
 });
 ## ================== EXCHANGE (Assessment) ================== ##
-
-

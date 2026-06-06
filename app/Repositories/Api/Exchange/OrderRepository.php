@@ -39,12 +39,25 @@ class OrderRepository
         return ['buy' => $buys, 'sell' => $sells];
     }
 
-    public function listByUser(int $userId, ?string $symbol = null)
+    public function listByUser(int $userId, array $filters = [])
     {
         $q = Order::where('user_id', $userId)->latest('id');
-        if ($symbol) {
+
+        $symbol = strtoupper((string) ($filters['symbol'] ?? ''));
+        if (in_array($symbol, ['BTC', 'ETH'], true)) {
             $q->where('symbol', $symbol);
         }
+
+        $side = strtolower((string) ($filters['side'] ?? ''));
+        if (in_array($side, [Order::SIDE_BUY, Order::SIDE_SELL], true)) {
+            $q->where('side', $side);
+        }
+
+        $status = Order::normalizeStatus($filters['status'] ?? null);
+        if ($status !== null) {
+            $q->where('status', $status);
+        }
+
         return $q->paginate(20);
     }
 
